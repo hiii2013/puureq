@@ -21,7 +21,8 @@ GitHub Copilotの使用状況とメトリックスを可視化するダッシュ
 
 ## 必要要件
 
-- Node.js 14.x 以上
+- Python 3.8 以上
+- pip（Pythonパッケージマネージャー）
 - GitHub Copilot Business または Enterprise アカウント
 - GitHub Personal Access Token（`copilot:read` スコープ付き）
 
@@ -37,7 +38,7 @@ cd puureq
 ### 2. 依存関係のインストール
 
 ```bash
-npm install
+pip install -r requirements.txt
 ```
 
 ### 3. 環境変数の設定
@@ -61,7 +62,7 @@ GITHUB_ORG=your-organization-name
 # GITHUB_ENTERPRISE=your-enterprise-slug
 
 # Server port
-PORT=3000
+PORT=8000
 ```
 
 ### 4. GitHub Personal Access Token の作成
@@ -76,10 +77,16 @@ PORT=3000
 ### 5. アプリケーションの起動
 
 ```bash
-npm start
+python app.py
 ```
 
-ブラウザで `http://localhost:3000` を開いてダッシュボードにアクセスします。
+または uvicorn を直接使用：
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+```
+
+ブラウザで `http://localhost:8000` を開いてダッシュボードにアクセスします。
 
 ## 使い方
 
@@ -115,10 +122,11 @@ npm start
 
 ## 技術スタック
 
-- **Backend**: Node.js, Express
-- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Python, FastAPI, Uvicorn
+- **Frontend**: Vue.js 3, HTML, CSS
 - **Charts**: Chart.js
 - **API**: GitHub REST API
+- **HTTP Client**: httpx (async)
 
 ## ライセンス
 
