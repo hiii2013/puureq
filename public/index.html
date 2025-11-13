@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot Metrics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 GitHub Copilot Metrics Dashboard</h1>
+            <div id="healthStatus" class="health-status"></div>
+        </header>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+        <div id="loadingMessage" class="loading-message" style="display: none;">データを読み込み中...</div>
+
+        <div class="controls">
+            <label for="dateRange">期間:</label>
+            <select id="dateRange">
+                <option value="7">過去7日間</option>
+                <option value="14">過去14日間</option>
+                <option value="28" selected>過去28日間</option>
+                <option value="90">過去90日間</option>
+            </select>
+            <button id="refreshBtn" class="btn-primary">更新</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">総アクティブユーザー</div>
+                <div class="stat-value" id="totalUsers">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">総提案数</div>
+                <div class="stat-value" id="totalSuggestions">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">受け入れ率</div>
+                <div class="stat-value" id="acceptanceRate">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">総シート数</div>
+                <div class="stat-value" id="totalSeats">-</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>日別アクティブユーザー</h2>
+                <canvas id="activeUsersChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>提案と受け入れ</h2>
+                <canvas id="suggestionsChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>言語別使用状況</h2>
+                <canvas id="languageChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>エディタ別使用状況</h2>
+                <canvas id="editorChart"></canvas>
+            </div>
+        </div>
+
+        <div class="breakdown-section">
+            <h2>詳細な内訳</h2>
+            <div id="breakdownTable"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
